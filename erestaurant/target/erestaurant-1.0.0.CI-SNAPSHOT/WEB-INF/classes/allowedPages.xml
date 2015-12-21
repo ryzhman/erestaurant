@@ -1,0 +1,26 @@
+<access>
+    <buyer>
+        <page>buyoffer.xhtml</page>
+        <page>faq.xhtml</page>
+        <page>index.jsp</page>
+        <page>login.xhtml</page>
+        <page>main.xhtml</page>
+        <page>registrationSucceded.xhtml</page>     
+    </buyer>
+    <seller>
+        <page>sellerpanel.xhtml</page>
+        <page>faq.xhtml</page>
+        <page>index.jsp</page>
+        <page>login.xhtml</page>
+        <page>main.xhtml</page>
+        <page>registrationSucceded.xhtml</page>     
+    </seller>
+    <administrator>
+        <page>sellerpanel.xhtml</page>
+        <page>faq.xhtml</page>
+        <page>index.jsp</page>
+        <page>login.xhtml</page>
+        <page>main.xhtml</page>
+        <page>registrationSucceded.xhtml</page>     
+    </administrator>
+</access>

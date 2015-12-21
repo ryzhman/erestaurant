@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+	<ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
+		<ui:define name="windowTitle">
+		#{msg['ds.main']}
+		#{orderBean.getListForDelivery()}
+		</ui:define>
+
+		<ui:define name="header">
+			<h:outputStylesheet library="css" name="style.css" />
+			<h:form id="header">
+				<h:commandButton action="#{languageBean.changeLanguage('')}"
+					value="English" image="/resources/images/uk-icon.png"
+					title="English" />
+				<h:outputText value=" " />
+				<h:commandButton action="#{languageBean.changeLanguage('UA')}"
+					value="Ukrainian" image="/resources/images/ukraine-icon.png"
+					title="Українська" />
+					
+				<h:panelGrid columns="2">
+					<h:outputText value="#{msg['greetings']} "></h:outputText>
+					<p:menuButton value="#{categoryBean.userBean.loginUser.name}">
+						<p:menuitem value="#{msg['cu.profile']}"
+							action="#{categoryBean.userBean.viewProfile}" ajax="false" />
+						<p:separator />
+						<p:menuitem value="#{msg['logout']}"
+							action="#{userBean.logout}" ajax="false" />
+					</p:menuButton>
+				</h:panelGrid>
+			</h:form>
+		</ui:define>
+		
+		<ui:define name="content">
+		<h2>				#{msg['ds.list']} 		</h2>
+			<h:form>
+				<p:dataTable value="#{orderBean.listForDeliv}" var="order"
+					styleClass="menuTable" headerClass="menuTableHeader"
+					rowClasses="menuTableOddRow, menuTableEvenRow">
+					<p:column>
+						<f:facet name="header">#{msg['su.Address']}</f:facet> 
+						#{order.address} 
+ 					</p:column>
+
+					<p:column>
+						<f:facet name="header">#{msg['admin.Price']}</f:facet> 
+						#{order.price} 
+ 					</p:column>
+
+					<p:column sortBy="#{order.timeOfOrder}">
+						<f:facet name="header">#{msg['ds.timeOfOrder']}</f:facet> 
+						#{order.timeOfOrder} 
+ 					</p:column>
+
+					<p:column sortBy="#{order.status}">
+						<f:facet name="header">#{msg['ds.status']}</f:facet>
+						#{order.status} 
+ 					</p:column> 
+
+					<p:column>
+						<!-- <f:facet name="header">#{msg['ds.status']}</f:facet> -->
+						<h:commandButton value="#{msg['ds.ship']}"
+							rendered="#{order.status=='READY_FOR_SHIPMENT'}"
+							action="#{orderBean.shipOrder(order.id)}"></h:commandButton>
+						<h:commandButton value="#{msg['ds.deliv']}"
+							rendered="#{order.status=='DELIVERING'}"
+							action="#{orderBean.markAsDelivered(order.id)}"></h:commandButton>
+
+						<!-- <h:selectOneMenu value="#{order.status}"
+							onchange="submit()" valueChangeListener="#{orderBean.statusChange}">
+							<f:selectItems value="#{enumBean.statuses}" />
+						</h:selectOneMenu> -->
+					</p:column>
+
+					<!-- <p:column>
+						<h:commandLink action="#{orderBean.changeStatusOfOrder(order.id)}">
+							<h:graphicImage value="resources/images/edit.ico" height="25"
+								width="25" title="Change status" />
+						</h:commandLink>
+					</p:column> -->
+				</p:dataTable>
+
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

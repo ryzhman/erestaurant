@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="WEB-INF/templates/BasicTemplate.xhtml">
+	<ui:define name="windowTitle">
+			#{msg['cu.main']}
+	</ui:define>
+	<ui:define name="header">
+		<h:outputStylesheet library="css" name="style.css" />
+		<h:form id="header">
+			<h:commandButton action="#{languageBean.changeLanguage('')}"
+					value="English" image="/resources/images/uk-icon.png"
+					title="English" />
+				<h:outputText value=" " />
+				<h:commandButton action="#{languageBean.changeLanguage('UA')}"
+					value="Ukrainian" image="/resources/images/ukraine-icon.png"
+					title="Українська" />
+
+			<c:if test="#{not empty cartBean.userBean.loginUser}">
+				<h:panelGrid columns="2">
+				<h:outputText value="#{msg['greetings']} "></h:outputText>
+					<p:menuButton value="#{cartBean.userBean.loginUser.name}">
+						<p:menuitem value="#{msg['cu.profile']}"
+							action="#{cartBean.userBean.viewProfile}" ajax="false"/>
+						<p:separator />
+						<p:menuitem value="#{msg['logout']}"
+							actionListener="#{cartBean.userBean.logout}" ajax="false" />
+					</p:menuButton>
+				</h:panelGrid>
+			</c:if> 
+			
+			<c:if test="#{empty cartBean.userBean.loginUser}">
+				<h:panelGrid columns="3">
+					<h:commandLink class="login" action="Login" value="Login">
+						<!-- <h:graphicImage value="resources/images/login.ico" height="50"
+							width="50" title="Login" /> -->
+					</h:commandLink>
+					<h:outputText class="or" value="or"></h:outputText>
+					<h:commandLink class="registration" action="Customer-Registration"
+						value="register">
+						<!-- <h:graphicImage value="resources/images/login.ico" height="50"
+							width="50" title="Register" /> -->
+					</h:commandLink>
+				</h:panelGrid>
+			</c:if>
+
+
+				<h:panelGrid columns="4" >
+					<h:panelGroup class="cart">
+					<!-- <div align="right"> -->
+						<h:outputText class="cart"
+							value="#{msg['cu.quantity']} - #{cartBean.mapOfItems.size()}, #{msg['cu.price']} - "></h:outputText>
+						<h:outputText value = "#{cartBean.round(cartBean.totalCost)}">
+							<!-- <f:convertNumber groupingUsed="false" minFractionDigits="2" /> -->
+						</h:outputText>
+					<!-- </div> -->
+					<!-- <div align="right">	 -->				
+					<!-- <h:outputText value=" #{msg['cu.price']} - #{cartBean.totalCost}"></h:outputText> -->
+					<!-- #{cartBean.totalCost} -->
+					<!-- </div> -->
+					<!-- <div align="right"> -->
+					
+					<h:commandLink action="Customer-Cart">
+						<h:graphicImage value="resources/images/cart.ico" height="50"
+							width="70" title="Go to cart" />
+					</h:commandLink>
+					<!-- </div> -->
+					</h:panelGroup>
+				</h:panelGrid>
+			</h:form>
+	</ui:define>
+	<ui:define name="content">
+		<h2>#{msg['cu.menu']}</h2>
+		<h:form id="body">
+    	 #{dishBean.refreshList()}
+    	
+			<h:dataTable value="#{dishBean.custMenu}" var="dish"
+				styleClass="menuTable" headerClass="menuTableHeader"
+				rowClasses="menuTableOddRow, menuTableEvenRow">
+				<h:column>
+					<f:facet name="header">#{msg['admin.NameOfDish']}</f:facet> 
+				#{dish.name} 
+ 			</h:column>
+				<h:column>
+					<f:facet name="header">#{msg['admin.Price']}</f:facet> 
+				#{dish.price} 
+			</h:column>
+				<h:column>
+					<f:facet name="header">#{msg['admin.Category']}</f:facet> 
+				#{dish.catOfDish} 
+			</h:column>
+				<h:column>
+					<h:commandLink action="#{cartBean.addToCart(dish.id)}">
+						<f:ajax event="click" update="header">
+							<h:graphicImage value="resources/images/addItem.ico" height="25"
+								width="25" title="Delete" />
+						</f:ajax>
+					</h:commandLink>
+				</h:column>
+			</h:dataTable>
+		</h:form>
+	</ui:define>
+
+</ui:composition>
+</html>
