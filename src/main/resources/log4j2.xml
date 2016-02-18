@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration status="ALL">
+<configuration> <!-- status="ALL" -->
 
  	<!-- <DynamicThresholdFilter key="loginId" defaultThreshold="ERROR"
 	 	onMatch="ACCEPT" onMismatch="NEUTRAL">
@@ -49,7 +49,7 @@
 	    </Logger>  -->
 	    
 		<root level="DEBUG"> <!-- additivity="false" -->
-			<appender-ref ref="Console" />
+			<!-- <appender-ref ref="Console" /> -->
 			<appender-ref ref="systemActivity"  />
 			<appender-ref ref="userActivity" />
 			<!-- <appender-ref ref="userActivity" level="TRACE"/> -->

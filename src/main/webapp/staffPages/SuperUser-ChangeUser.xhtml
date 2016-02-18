@@ -44,19 +44,19 @@
 			<!-- <p:growl id="msgs" showDetail="true" /> -->
 				<h:panelGrid columns="3" id="form">
 					<h:outputText value="#{msg['su.NameOfUser']}"></h:outputText>
-					<p:inputText id="name" value="#{userBean.user.name}"
+					<p:inputText id="name" value="#{newUserBean.user.name}"
 						required="true" message="#{msg['su.enterName']}">
 					</p:inputText>
 					<p:message for="name" style="color:red" />
 
 					<h:outputText value="#{msg['su.SurnameOfUser']}" />
-					<p:inputText id="surname" value="#{userBean.user.surname}"
+					<p:inputText id="surname" value="#{newUserBean.user.surname}"
 						required="true" message="#{msg['su.enterSurname']}">
 					</p:inputText>
 					<p:message for="surname" style="color:red" />
 
 					<h:outputText value="#{msg['su.Login']}"></h:outputText>
-					<p:inputText id="login" value="#{userBean.user.login}"
+					<p:inputText id="login" value="#{newUserBean.user.login}"
 						required="true" message="#{msg['su.enterLogin']}">
 					</p:inputText>
 					<p:message for="login" style="color:red" />
@@ -73,13 +73,13 @@
 					<p:message for="repeatPass"></p:message> 
 
 					<h:outputText value="#{msg['su.Type']}"></h:outputText>
-					<p:selectOneMenu value="#{userBean.user.typeOfUser}">
+					<p:selectOneMenu value="#{newUserBean.user.typeOfUser}">
 						<f:selectItems value="#{enumBean.types}" />
 					</p:selectOneMenu>
 					<h:outputText></h:outputText>
 
 					<h:outputText value="#{msg['su.Email']}"></h:outputText>
-					<p:inputText id="email" value="#{userBean.user.email}"
+					<p:inputText id="email" value="#{newUserBean.user.email}"
 						required="true" message="#{msg['su.enterEmail']}"
 						validatorMessage="Invalid email format">
 						<f:validateRegex
@@ -88,32 +88,32 @@
 					<p:message for="email" style="color:red" />
 
 					<h:outputText value="#{msg['su.DoB']}"></h:outputText>
-					<p:calendar id="german" value="#{userBean.user.dateOfBirth}"
+					<p:calendar id="german" value="#{newUserBean.user.dateOfBirth}"
 						locale="en" navigator="true" pattern="yyyy-MMM-dd" maxdate="#{reportBean.today}" required="true" />
 					<p:message for="german" style="color:red" />
 
 					<h:outputText value="#{msg['cu.address.city']}"></h:outputText>
-					<p:inputText id="city" value="#{userBean.city}" required="true"
+					<p:inputText id="city" value="#{newUserBean.city}" required="true"
 						requiredMessage="#{msg['cu.enterCity']}"></p:inputText>
 					<p:message for="city" style="color:red" />
 
 					<h:outputText value="#{msg['cu.address.street']}"></h:outputText>
-					<p:inputText id="street" value="#{userBean.street}" required="true"
+					<p:inputText id="street" value="#{newUserBean.street}" required="true"
 						requiredMessage="#{msg['cu.enterStreet']}"></p:inputText>
 					<p:message for="street" style="color:red" />
 
 					<h:outputText value="#{msg['cu.address.noOfHouse']}"></h:outputText>
-					<p:inputText id="noOfHouse" value="#{userBean.noOfHouse}"
+					<p:inputText id="noOfHouse" value="#{newUserBean.noOfHouse}"
 						required="true" requiredMessage="#{msg['cu.enterHouse']}"></p:inputText>
 					<p:message for="noOfHouse" style="color:red" />
 
 					<h:outputText value="#{msg['cu.address.app']}"></h:outputText>
-					<p:inputText id="app" value="#{userBean.app}" required="true"
+					<p:inputText id="app" value="#{newUserBean.app}" required="true"
 						requiredMessage="#{msg['cu.enterApp']}"></p:inputText>
 					<p:message for="app" style="color:red" />
 
 					<h:outputText value="#{msg['cu.address.zip']}"></h:outputText>
-					<p:inputText id="zip" value="#{userBean.zip}" required="true"
+					<p:inputText id="zip" value="#{newUserBean.zip}" required="true"
 						requiredMessage="#{msg['cu.enterZip']}"
 						converterMessage="#{msg['su.convertZip']}"
 						validatorMessage="#{msg['su.validateZip']}">
@@ -123,7 +123,7 @@
 					<p:message for="zip" style="color:red" />
 
 					<h:outputText value="#{msg['su.Active']}"></h:outputText>
-					<p:selectOneRadio value="#{userBean.user.isActive}">
+					<p:selectOneRadio value="#{newUserBean.user.isActive}">
 						<f:selectItem itemValue="TRUE" itemLabel="Yes"/>
 						<f:selectItem itemValue="FALSE" itemLabel="No"/>
 					</p:selectOneRadio>

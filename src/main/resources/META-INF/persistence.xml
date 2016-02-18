@@ -8,7 +8,7 @@ xmlns="http://java.sun.com/xml/ns/persistence"  version="2.0" >
 		</provider>
 	<properties>
       	    <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver" />
-      	    <property name="javax.persistence.jdbc.url" value="jdbc:derby:..//RestaurantDB1;create=true" />
+      	    <property name="javax.persistence.jdbc.url" value="jdbc:derby:../RestaurantDB1" />
       	    <property name="eclipselink.ddl-generation.output-mode" value="database" />
         	<property name="eclipselink.weaving" value="static" />
         	     

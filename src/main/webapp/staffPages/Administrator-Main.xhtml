@@ -5,8 +5,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:sec="http://www.springframework.org/security/tags">
+	xmlns:p="http://primefaces.org/ui">
 
 <ui:composition
 	template="/WEB-INF/templates/BasicTemplate.xhtml">
@@ -39,7 +38,6 @@
 	</ui:define>
 
 	<ui:define name="content">
-	<sec:authorize access="hasAnyRole('ROLE_ADMIN')">
 		<h:form>
 		<p:messages></p:messages>
 			<!-- <p:growl id="growl" showDetail="true" sticky="false"
@@ -55,7 +53,6 @@
 			<!-- administrator/ -->
 		</h:form>
 
-	</sec:authorize>
 	</ui:define>
 </ui:composition>
 </html>

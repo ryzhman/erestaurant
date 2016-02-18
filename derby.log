@@ -1,7 +1,7 @@
 ----------------------------------------------------------------
-Thu Feb 18 16:19:21 EET 2016:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.1.1 - (1458268): instance a816c00e-0152-f4bf-b32c-00000fe26c60 
-on database directory D:\Підготовка до Канади\Java\Workspace\RestaurantDB1 with class loader WebappClassLoader
+Thu Feb 18 17:34:45 EET 2016:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.1.1 - (1458268): instance a816c00e-0152-f504-c64a-000010ce9970 
+on database directory D:\RestaurantDB1 with class loader WebappClassLoader
   context: erestaurant
   delegate: false
 ----------> Parent Classloader:
@@ -10,7 +10,7 @@ java.net.URLClassLoader@5a07e868
 Loaded from file:/D:/Підготовка%20до%20Канади/Java/Workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp4/wtpwebapps/ElectronicRestaurant1/WEB-INF/lib/derby-10.10.1.1.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_60-b27
-user.dir=D:\Підготовка до Канади\Java\Workspace\ElectronicRestaurant1
+user.dir=D:\er
 os.name=Windows 7
 os.arch=amd64
 os.version=6.1
