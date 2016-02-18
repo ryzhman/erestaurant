@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:composite="http://java.sun.com/jsf/composite"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui">
+<ui:composition template="WEB-INF/templates/BasicTemplate.xhtml">
+	<ui:define name="windowTitle">
+		#{msg['cu.enterAddress']}
+		</ui:define>
+		<ui:define name="header">
+			<h:outputStylesheet library="css" name="style.css" />
+			<h:form>
+				<h:commandButton action="#{languageBean.changeLanguage('')}"
+					value="English" image="resources/images/uk-icon.png"
+					title="English" />
+				<h:outputText value=" " />
+				<h:commandButton action="#{languageBean.changeLanguage('UA')}"
+					value="Ukrainian" image="resources/images/ukraine-icon.png"
+					title="Українська" />
+			
+			<c:if test="#{not empty cartBean.userBean.loginUser}">
+				<h:panelGrid columns="2">
+				<h:outputText value="#{msg['greetings']} "></h:outputText>
+				<!-- <h:commandLink value="Logout" action="#{cartBean.loginBean.logout}"/> -->
+					
+					<p:menuButton value="#{cartBean.userBean.loginUser.name}">
+						<p:menuitem value="#{msg['cu.profile']}"
+							actionListener="#{cartBean.userBean.viewProfile()}" ajax="false"/>
+						<p:separator />
+						<p:menuitem value="#{msg['logout']}"
+							actionListener="#{cartBean.userBean.logout}" ajax="false" />
+					</p:menuButton>
+				</h:panelGrid>
+			</c:if>
+			<c:if test="#{empty cartBean.userBean.loginUser}">
+				<h:panelGrid columns="3">
+					<h:commandLink class="login" action="Login" value="Login">
+						<!-- <h:graphicImage value="resources/images/login.ico" height="50"
+							width="50" title="Login" /> -->
+					</h:commandLink>
+					<h:outputText class="or" value="or"></h:outputText>
+					<h:commandLink class="registration" action="Customer-Registration"
+						value="register">
+						<!-- <h:graphicImage value="resources/images/login.ico" height="50"
+							width="50" title="Register" /> -->
+					</h:commandLink>
+				</h:panelGrid>
+			</c:if>
+			</h:form>
+
+			<h:form>
+				<h:panelGrid columns="4" >
+					<h:panelGroup class="cart">
+					<!-- <div align="right"> -->
+						<h:outputText class="cart"
+							value="#{msg['cu.quantity']} - #{cartBean.mapOfItems.size()}, #{msg['cu.price']} - "></h:outputText>
+						<h:outputText value="#{cartBean.round(cartBean.totalCost)}"></h:outputText>
+
+						<!-- </div> -->
+					<!-- <div align="right">	 -->				
+					<!-- <h:outputText value=" #{msg['cu.price']} - #{cartBean.totalCost}"></h:outputText> -->
+					<!-- #{cartBean.totalCost} -->
+					<!-- </div> -->
+					<!-- <div align="right"> -->
+					
+					<h:commandLink action="Customer-Cart">
+						<h:graphicImage value="resources/images/cart.ico" height="50"
+							width="70" title="Go to cart" />
+					</h:commandLink>
+					<!-- </div> -->
+					</h:panelGroup>
+				</h:panelGrid>
+			</h:form>
+		</ui:define>
+
+		<ui:define name="content">
+		<h2>#{msg['cu.enterAddressLong']}</h2>
+			<h:form>
+			<h:panelGrid columns="3" width="500">
+				<h:outputText value="#{msg['cu.address.city']}"></h:outputText>
+				<p:inputText id="city" value="#{cartBean.city}" required="true"
+					requiredMessage="#{msg['cu.enterCity']}"></p:inputText>
+				<p:message for="city" style="color:red" />
+				
+				<h:outputText value="#{msg['cu.address.street']}"></h:outputText>
+				<p:inputText id="street" value="#{cartBean.street}" required="true"
+					requiredMessage="#{msg['cu.enterStreet']}"></p:inputText>
+				<p:message for="street" style="color:red" />
+
+
+				<h:outputText value="#{msg['cu.address.noOfHouse']}"></h:outputText>
+				<p:inputText id="noOfHouse" value="#{cartBean.noOfHouse}"
+					required="true" requiredMessage="#{msg['cu.enterHouse']}"></p:inputText>
+				<p:message for="noOfHouse" style="color:red" />
+
+				<h:outputText value="#{msg['cu.address.app']}"></h:outputText>
+				<p:inputText id="app" value="#{cartBean.app}" required="true"
+					requiredMessage="#{msg['cu.enterApp']}"></p:inputText>
+				<p:message for="app" style="color:red" />
+
+				<h:outputText value="#{msg['cu.address.zip']}"></h:outputText>
+				<p:inputText id="zip" value="#{cartBean.zip}" required="true"
+					requiredMessage="#{msg['cu.enterZip']}" 
+					converterMessage="#{msg['su.convertZip']}"    
+    				validatorMessage="#{msg['su.validateZip']}">
+					<f:convertNumber pattern="#####" />
+					<f:validateLongRange minimum="10000" maximum="99999" />
+					</p:inputText>
+				<p:message for="zip" style="color:red" />
+			</h:panelGrid>
+				
+				<h:outputText>
+					<br/>
+				</h:outputText>
+				<br/>
+			<p:commandButton value="#{msg['admin.dishSubmit']}"
+				action="#{cartBean.submitOrder}" ajax="false" />
+			<p:commandButton value="#{msg['admin.back']}" action="Customer-Menu?faces-redirect=true" immediate="true"/>
+			</h:form>
+		</ui:define>
+</ui:composition>
+
+</html>

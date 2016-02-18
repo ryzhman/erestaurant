@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<body>
+	<ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
+		<ui:define name="windowTitle">
+		#{msg['su.Main']}
+		#{userBean.refreshList()}
+		</ui:define>
+
+		<ui:define name="header">
+			<h:outputStylesheet library="css" name="style.css" />
+			<h:form id="header">
+				<h:commandButton action="#{languageBean.changeLanguage('')}"
+					value="English" image="/resources/images/uk-icon.png"
+					title="English" />
+				<h:outputText value=" " />
+				<h:commandButton action="#{languageBean.changeLanguage('UA')}"
+					value="Ukrainian" image="/resources/images/ukraine-icon.png"
+					title="Українська" />
+				
+				<h:panelGrid columns="2">
+					<h:outputText value="#{msg['greetings']} "></h:outputText>
+					<p:menuButton value="#{categoryBean.userBean.loginUser.name}">
+						<p:menuitem value="#{msg['cu.profile']}"
+							action="#{categoryBean.userBean.viewProfile}" ajax="false" />
+						<p:separator />
+						<p:menuitem value="#{msg['logout']}"
+							action="#{userBean.logout}" ajax="false" />
+					</p:menuButton>
+				</h:panelGrid>
+			</h:form>
+		</ui:define>
+		
+		<ui:define name="content">
+		<h2>	#{msg['su.List']} 		</h2>
+			<h:form>
+				<h:dataTable value="#{userBean.users}" var="user"
+					styleClass="menuTable" headerClass="menuTableHeader"
+					rowClasses="menuTableOddRow, menuTableEvenRow">
+					<h:column>
+						<f:facet name="header">#{msg['su.NameOfUser']}</f:facet> 
+				#{user.name} 
+ 				</h:column>
+
+					<h:column>
+						<f:facet name="header">#{msg['su.SurnameOfUser']}</f:facet> 
+				#{user.surname} 
+ 				</h:column>
+
+					<h:column>
+						<f:facet name="header">#{msg['su.Login']}</f:facet> 
+				#{user.login} 
+ 				</h:column>
+
+					<h:column>
+						<f:facet name="header">#{msg['su.Type']}</f:facet> 
+				#{user.typeOfUser} 
+ 				</h:column>
+
+					<h:column>
+						<f:facet name="header">#{msg['su.DateOfCreation']}</f:facet> 
+				#{user.dateOfCreation} 
+ 				</h:column>
+
+					<h:column>
+						<f:facet name="header">#{msg['su.DateOfLastLogin']}</f:facet> 
+				#{user.dateOfLastLogin} 
+ 				</h:column>
+
+					<h:column>
+						<f:facet name="header">#{msg['su.Email']}</f:facet> 
+				#{user.email} 
+ 				</h:column>
+
+					<h:column>
+						<f:facet name="header">#{msg['su.DoB']}</f:facet>
+						<h:outputText value="#{user.dateOfBirth}">
+							<f:convertDateTime pattern="dd MMM yyyy" />
+						</h:outputText>
+ 				</h:column>
+
+					<h:column>
+						<f:facet name="header">#{msg['su.Address']}</f:facet> 
+				#{user.deliveryAddress} 
+ 				</h:column>
+
+					<h:column>
+						<f:facet name="header">#{msg['su.Active']}</f:facet> 
+				#{user.isActive} 
+ 				</h:column>
+
+					<h:column>
+						<h:commandLink action="#{userBean.editUser(user.id)}">
+							<h:graphicImage value="/resources/images/edit.ico" height="25"
+								width="25" title="Edit" />
+						</h:commandLink>
+					</h:column>
+				</h:dataTable>
+
+				<h:commandButton value="#{msg['su.AddUser']}"
+				action="SuperUser-AddUser?faces-redirect=true" />
+
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

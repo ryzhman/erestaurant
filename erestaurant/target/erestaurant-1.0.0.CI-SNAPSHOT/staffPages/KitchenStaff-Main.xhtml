@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+	<ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
+		<ui:define name="windowTitle">
+		#{msg['ks.main']}
+		<!-- #{orderBean.refreshList()} -->
+		</ui:define>
+
+		<ui:define name="header">
+			<h:outputStylesheet library="css" name="style.css" />
+			<h:form id="header">
+				<h:commandButton action="#{languageBean.changeLanguage('')}"
+					value="English" image="/resources/images/uk-icon.png"
+					title="English" />
+				<h:outputText value=" " />
+				<h:commandButton action="#{languageBean.changeLanguage('UA')}"
+					value="Ukrainian" image="/resources/images/ukraine-icon.png"
+					title="Українська" />
+				
+				<h:panelGrid columns="2">
+					<h:outputText value="#{msg['greetings']} "></h:outputText>
+					<p:menuButton value="#{categoryBean.userBean.loginUser.name}">
+						<p:menuitem value="#{msg['cu.profile']}"
+							action="#{categoryBean.userBean.viewProfile}" ajax="false" />
+						<p:separator />
+						<p:menuitem value="#{msg['logout']}"
+							action="#{userBean.logout}" ajax="false" />
+					</p:menuButton>
+				</h:panelGrid>
+			</h:form>
+		</ui:define>
+		
+		<ui:define name="content">
+			<h2>				#{msg['ks.list']}	</h2>
+			<h:form>
+				<p:dataTable value="#{orderBean.mapOfChief.entrySet().toArray()}"
+					var="item" styleClass="menuTable" headerClass="menuTableHeader"
+					rowClasses="menuTableOddRow, menuTableEvenRow">
+
+					<p:column>
+						<f:facet name="header">#{msg['admin.NameOfDish']}</f:facet> 
+				 	#{orderBean.getNameOfDish(item.key)} 
+ 					</p:column>
+
+					<p:column>
+						<f:facet name="header">#{msg['cu.quantity']}</f:facet>
+					#{item.value}
+					</p:column>
+					<!-- <p:column>sortBy="#{timeOfOrder}">
+						<h:outputText name="#{msg['ds.timeOfOrder']}"></h:outputText>
+						#{orderBean.listForCook.get(item.key).order.timeOfOrder}
+						<f:facet name="header">#{msg['cu.price']}</f:facet> 
+					#{item.key.price*item.value}
+					</p:column> -->
+					<p:column>
+						<h:commandLink action="#{orderBean.cookDish(item.key)}">
+							<h:graphicImage value="/resources/images/edit.ico" height="25"
+								width="25" title="Cook dish" />
+						</h:commandLink>
+					</p:column>
+				</p:dataTable>
+
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>
