@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+	 http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
+	version="2.2">
+
+	<!-- Enable Spring -->
+	<application>
+		<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
+	</application>
+
+	<!-- navigation-rule for login.xhtml -->
+	<!-- <navigation-rule>
+		<from-view-id>/webapp/login.xhtml</from-view-id>
+		navigation-case for method login()
+		<navigation-case>
+			<from-action>#{userBean.login}</from-action>
+			<from-outcome>correct</from-outcome>
+			<to-view-id>/webapp/staffPages/Customer-Thanks.xhtml</to-view-id>
+		</navigation-case>
+		navigation-case for method login()
+		<navigation-case>
+			<from-action>#{userBean.login}</from-action>
+			<from-outcome>incorrect</from-outcome>
+			<to-view-id>/webapp/login.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule> -->
+
+	<!-- <navigation-rule>
+		<navigation-case>
+			<from-action>#{userBean.logout}</from-action>
+			<from-outcome>loggedout</from-outcome>
+			<to-view-id>/webapp/login.xhtml</to-view-id>
+			<redirect></redirect>
+		</navigation-case>
+	</navigation-rule> -->
+
+
+	<application>
+
+	<locale-config>
+		<default-locale>en</default-locale>
+		<supported-locale>ua</supported-locale>
+	</locale-config>
+
+	<resource-bundle>
+		<base-name>messages</base-name>
+		<var>msg</var>
+	</resource-bundle>
+
+</application>
+
+</faces-config>
+    

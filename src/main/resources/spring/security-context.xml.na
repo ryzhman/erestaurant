@@ -1,0 +1,76 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:sec="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+    http://www.springframework.org/schema/security
+    http://www.springframework.org/schema/security/spring-security-4.0.xsd">
+
+Enable method level Spring Security by annotations 
+    <sec:global-method-security pre-post-annotations="enabled" />  
+    <sec:http auto-config="true" use-expressions="true">
+    
+    	Page level Spring Security : Intercept access to resources in /pages/secure/**
+        <sec:intercept-url pattern="/webapp/staffPages/administrator/**" access="hasRole('ROLE_ADMIN')" />
+        
+        <sec:intercept-url pattern="/webapp/staffPages/analyst/**" access="hasRole('ROLE_ANALYST')" />
+        
+        <sec:intercept-url pattern="/webapp/staffPages/delivery/**" access="hasRole('ROLE_DELIVERY')" />
+        
+        <sec:intercept-url pattern="/webapp/staffPages/kitchen/**" access="hasRole('ROLE_KITCHEN')" />
+        
+        <sec:intercept-url pattern="/webapp/staffPages/superUs/**" access="hasRole('ROLE_SUSER')" />
+
+        Page level Spring Security : Permit access to resources in /pages/unsecure/**
+        <sec:intercept-url pattern="/webapp/**" access="permitAll"/>
+
+        Page level Spring Security : Intercept access to resources in /**
+        <sec:intercept-url pattern="/**" access="hasRole('ROLE_MODERATOR')"/>
+
+        Page level Spring Security : Enable Primefaces
+        <sec:intercept-url pattern="/javax.faces.resource/**" access="permitAll"/>
+  
+        Define login page for Spring Security      
+        <sec:form-login login-page="/webapp/Login.xhtml"/>
+
+        Define logout properties for Spring Security
+        <sec:logout invalidate-session="true" delete-cookies="true" logout-success-url="/"></sec:logout>
+    
+    </sec:http>
+    
+    Unknown config!!!!!!
+    
+      Set customUserDetailsService class as the authentication Manager for Spring Security
+    <sec:authentication-manager alias="authenticationManager">
+        <sec:authentication-provider user-service-ref="customUserDetailsService">
+            <sec:password-encoder hash="plaintext"></sec:password-encoder>
+        </sec:authentication-provider>
+    </sec:authentication-manager>
+
+     Inject authentication Manager to our LoginBean
+    <beans:bean id="loginBean" name="loginBean" class="managedController.LoginBean" scope="prototype">
+        <beans:property name="authenticationManager" ref="authenticationManager"></beans:property>
+    </beans:bean>
+     Unknown config!!!!!!
+    
+    
+    Config for Spring MVC
+	<http auto-config="true"> use-expressions="true">
+		<intercept-url pattern="/administrator/*"
+		access="ROLE_ADMIN"/>  "hasAnyRole('ROLE_ADMIN','ROLE_MODERATOR')" />
+	</http>
+
+	<beans:import resource="servlet-context.xml" />
+
+	<authentication-manager>
+		<authentication-provider>
+			<password-encoder ref="encoder" />
+			<user-service>
+				<user name="admin1"
+					password="admin1"
+					authorities="ROLE_ADMIN" />
+			</user-service>
+		</authentication-provider>
+	</authentication-manager>
+
+</beans:beans> 
